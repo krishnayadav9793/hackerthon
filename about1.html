@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar with Dropdown</title>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .search-options {
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .search-options.show {
+            display: block;
+        }
+        .search-option {
+            padding: 0.5rem 1rem;
+            transition: background-color 0.2s;
+        }
+        .search-option:hover, .search-option:focus {
+            background-color: #f3f4f6;
+        }
+        .search-option:active {
+            background-color: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md relative">
+        <label for="searchInput" class="sr-only">Search</label>
+        <div class="relative">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="Search..." 
+                class="w-full p-3 pl-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                aria-controls="searchOptions"
+                onclick="toggleOptions()"
+                onkeydown="handleKeyDown(event)"
+            >
+            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        </div>
+        
+        <ul id="searchOptions" role="listbox" class="search-options mt-1 rounded-lg">
+            <!-- Options will be dynamically inserted here -->
+        </ul>
+    </div>
+
+    <script>
+        const options = [
+            'Apple', 'Banana', 'Cherry', 'Date', 'Elderberry',
+            'Fig', 'Grape', 'Honeydew', 'Kiwi', 'Lemon',
+            'Mango', 'Nectarine', 'Orange', 'Peach', 'Quince'
+        ];
+
+        function toggleOptions() {
+            const optionsContainer = document.getElementById('searchOptions');
+            const isExpanded = optionsContainer.classList.toggle('show');
+            document.getElementById('searchInput').setAttribute('aria-expanded', isExpanded);
+            if (isExpanded) {
+                filterOptions();
+            }
+        }
+
+        function filterOptions() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const optionsContainer = document.getElementById('searchOptions');
+            optionsContainer.innerHTML = '';
+
+            const filteredOptions = options.filter(option => 
+                option.toLowerCase().includes(input)
+            );
+
+            if (filteredOptions.length === 0) {
+                const noResults = document.createElement('li');
+                noResults.className = 'search-option text-gray-500';
+                noResults.textContent = 'No results found';
+                optionsContainer.appendChild(noResults);
+                return;
+            }
+
+            filteredOptions.forEach(option => {
+                const li = document.createElement('li');
+                li.className = 'search-option';
+                li.tabIndex = 0;
+                li.role = 'option';
+                li.textContent = option;
+                li.addEventListener('click', function() {
+                    document.getElementById('searchInput').value = option;
+                    optionsContainer.classList.remove('show');
+                });
+                optionsContainer.appendChild(li);
+            });
+        }
+
+        function handleKeyDown(event) {
+            const optionsContainer = document.getElementById('searchOptions');
+            const input = document.getElementById('searchInput');
+            
+            if (event.key === 'Escape') {
+                optionsContainer.classList.remove('show');
+                input.setAttribute('aria-expanded', 'false');
+            } else if (event.key === 'ArrowDown' && optionsContainer.classList.contains('show')) {
+                event.preventDefault();
+                const firstOption = optionsContainer.querySelector('.search-option');
+                if (firstOption) firstOption.focus();
+            } else if (event.key === 'Enter') {
+                filterOptions();
+                if (!optionsContainer.classList.contains('show')) {
+                    toggleOptions();
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchContainer = document.querySelector('.relative');
+            const optionsContainer = document.getElementById('searchOptions');
+            
+            if (!searchContainer.contains(event.target)) {
+                optionsContainer.classList.remove('show');
+                document.getElementById('searchInput').setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Initialize with all options
+        document.getElementById('searchInput').addEventListener('input', filterOptions);
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Search UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fdf5e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-section {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .right-section {
+            flex: 1;
+        }
+
+        .right-section img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 5px;
+        }
+
+        .locations {
+            margin-bottom: 20px;
+        }
+
+        .location {
+            background: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .location.selected {
+            background: #c7c7ff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: orange;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>Travel made easy</h1>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for hidden gems near you...">
+            </div>
+            <div class="locations" id="locationList">
+                <div class="location">📍 Sargasan, Gandhinagar</div>
+                <div class="location selected">📍 Kudasan, Gandhinagar</div>
+                <div class="location">📍 Palaj, Gandhinagar</div>
+                <div class="location selected">📍 Gift City, Gandhinagar</div>
+            </div>
+            <div class="buttons">
+                <button class="btn" onclick="detectLocation()">DETECT LOCATION</button>
+                <button class="btn" onclick="surpriseMe()">SURPRISE ME</button>
+            </div>
+        </div>
+        <div class="right-section">
+            <img src="image.png" alt="Travel Adventure">
+        </div>
+    </div>
+
+    <script>
+        // Toggle selected class on click
+        document.querySelectorAll('.location').forEach(loc => {
+            loc.addEventListener('click', () => {
+                loc.classList.toggle('selected');
+            });
+        });
+
+        // Simulate location detection
+        function detectLocation() {
+            alert('Detecting your location...');
+            const newLocation = document.createElement('div');
+            newLocation.className = 'location selected';
+            newLocation.textContent = '📍 Detected Location, Gandhinagar';
+            document.getElementById('locationList').appendChild(newLocation);
+            newLocation.addEventListener('click', () => {
+                newLocation.classList.toggle('selected');
+            });
+        }
+
+        // Random surprise location
+        function surpriseMe() {
+            const surprises = ['📍 Adalaj, Gandhinagar', '📍 Indroda Park, Gandhinagar', '📍 Sector 21, Gandhinagar'];
+            const random = surprises[Math.floor(Math.random() * surprises.length)];
+            const surpriseLocation = document.createElement('div');
+            surpriseLocation.className = 'location selected';
+            surpriseLocation.textContent = random;
+            document.getElementById('locationList').appendChild(surpriseLocation);
+            surpriseLocation.addEventListener('click', () => {
+                surpriseLocation.classList.toggle('selected');
+            });
+        }
+    </script>
+</body>
+</html>
