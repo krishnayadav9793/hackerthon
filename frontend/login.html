@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log In</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #ff6f00, #ffa500);
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #ff6f00;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .toggle-link {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9em;
+      cursor: pointer;
+      color: #555;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 id="formTitle">Log In</h1>
+
+  <!-- Log In Form -->
+  <form id="loginForm">
+    <input type="email" id="loginEmail" placeholder="Email" required />
+    <input type="password" id="loginPassword" placeholder="Password" required />
+    <button type="submit">Log In</button>
+  </form>
+
+  <!-- Sign Up Form -->
+  <form id="signupForm" style="display: none;">
+    <input type="text" id="signupUsername" placeholder="Username" required />
+    <input type="number" id="signupAge" placeholder="Age" required min="1" />
+    <select id="signupGender" required>
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <input type="email" id="signupEmail" placeholder="Email" required />
+    <input type="password" id="signupPassword" placeholder="Password" required />
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <div class="toggle-link" id="toggleForm">Don't have an account? Sign up</div>
+</div>
+
+<script>
+  const toggleLink = document.getElementById("toggleForm");
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
+  const formTitle = document.getElementById("formTitle");
+
+  toggleLink.addEventListener("click", () => {
+    const isLoginVisible = loginForm.style.display !== "none";
+
+    loginForm.style.display = isLoginVisible ? "none" : "block";
+    signupForm.style.display = isLoginVisible ? "block" : "none";
+    formTitle.textContent = isLoginVisible ? "Sign Up" : "Log In";
+    toggleLink.textContent = isLoginVisible
+      ? "Already have an account? Log in"
+      : "Don't have an account? Sign up";
+  });
+
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value;
+    alert(Logged in as : ${email});
+  });
+
+  signupForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = document.getElementById("signupUsername").value;
+    const age = document.getElementById("signupAge").value;
+    const gender = document.getElementById("signupGender").value;
+    const email = document.getElementById("signupEmail").value;
+
+    alert(Signedup as : ${username} (${email}, ${age} yrs, ${gender}));
+  });
+</script>
+
+</body>
+</html>
+

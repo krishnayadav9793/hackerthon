@@ -114,3 +114,14 @@ a:hover{
     font-size: 1rem;
     border: 2px solid white;
 }
+
+.login{
+    display: flex;
+    flex-direction: row;
+    align-self: end;
+    align-content: end;
+    justify-content: end;
+    margin-top:10px;
+    margin-bottom: 10px;
+    padding: 20px;
+}

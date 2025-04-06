@@ -3,18 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Q&A Chatbot</title>
+  <title>Travel Made Easy</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-box" id="chatBox"></div>
-    <form id="chatForm">
-      <input type="text" id="userInput" placeholder="Ask a question..." autocomplete="off" required />
-      <button type="submit">Send</button>
-    </form>
+
+  
+  <div class="heading">
+    <div class="options">
+      <ul>
+        <a href="index.html"><li>home</li></a>
+        <a href="search.html"><li>search</li></a>
+        <a href="/frontend/hackerthon/index2.html"><li>deals</li></a>
+        <a href="/frontend/hackerthon/index1.html"><li>services</li></a>
+        <a href="/frontend/hackerthon/testimonial.html"><li>reviews</li></a>
+        <a href="/frontend/hackerthon/index.html"><li>contact us</li></a>
+      </ul>
+    </div>
   </div>
 
+   <!-- Inside container div, replace the locationList and buttons section with this -->
+   <div class="container">
+    <h1>Travel Made Easy</h1>
+    <input type="text" id="searchInput" placeholder="Search for a place..." />
+    <button class="btn" onclick="searchPlace()">SEARCH</button>
+    <div id="distanceInfo"></div>
+  </div>
+  
+  <div id="map"></div>
+  
+
+
   <script src="script.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcl6fxIRgrvRKsq6cSv19M_HJ4JbNJ-is&callback=testMap">
+  </script>
 </body>
 </html>

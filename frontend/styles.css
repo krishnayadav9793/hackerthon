@@ -1,70 +1,100 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.heading {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.options ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0 20px;
+  margin: 0;
+  gap: 20px;
+}
+
+.options a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.options a:hover {
+  color: orange;
+}
+
+.container {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  width: 600px;
+  max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+
+.btn {
+  background: orange;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: darkorange;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#searchInput {
+  padding: 10px;
+  width: calc(100% - 130px);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#distanceInfo {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 15px;
   }
   
-  .chat-container {
-    width: 400px;
-    max-width: 90%;
-    background: #ffffff;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1),
-                0 1px 3px rgba(0,0,0,0.08);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .chat-box {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    height: 400px;
-  }
-  
-  .message {
-    margin: 10px 0;
-  }
-  
-  .user {
-    text-align: right;
-    color: #1e88e5;
-  }
-  
-  .bot {
-    text-align: left;
-    color: #4caf50;
-  }
-  
-  form {
-    display: flex;
-    border-top: 1px solid #ddd;
-  }
-  
-  input {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-  }
-  
-  button {
-    padding: 12px 20px;
-    border: none;
-    background-color: #1e88e5;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #1565c0;
-  }
-  
+  .options ul {
+    gap: 10px;
+}
+}
