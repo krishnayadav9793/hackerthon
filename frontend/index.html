@@ -22,21 +22,90 @@
             <!-- <div class="logo">
                 <a href="index.html" ><img src="logo.png" alt="locallens"  width="150px"></a>
             </div> -->
-            <div class="user">
-                <div class="login">
-                    <p>login</p>
-                    <!-- <img src="" -->
-                </div>
-                <div class="signup">
-                    <p>sign up</p>
-                    <!-- <img src="" -->
-                </div>
-            </div>
+            
         </div>
         <div class="videobg">
             
-            <video src="video.mp4" autoplay  width="100%">ready for your best discovery letus find it with your</video>
+            <video src="video.mp4" autoplay muted loop crossorigin="anonymous" preload="metadata"  width="100%" style="background-repeat: no-repeat; display: inline; gap: 0;">ready for your best discovery letus find it with your</video>
+            <div style="display: inline; ">
+                <!-- <p>ready for your best discovery let us find it with your</p> -->
+                <div class="centered-content">
+                    <h1>Ready for your</h1>
+                    <h1>best discovery?</h1>
+                    <p>Let us find it for you</p>
+                    <a href="https://www.google.co.in/maps/@23.2661635,72.6499328,15z?entry=ttu&g_ep=EgoyMDI1MDQwMi4xIKXMDSoASAFQAw%3D%3D" id="openMapBtn">START HERE</a>
+                    <div id="mapModal" class="modal">
+                        <div class="modal-content">
+                          <!-- <span class="close">&times;</span> -->
+                          <div id="map" style="height: 500px; width: 100%;"></div>
+                        </div>
+                      </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- <script>
+        document.getElementById("openMapBtn").onclick = function() {
+  document.getElementById("mapModal").style.display = "";
+  initMap(); // initialize map when modal opens
+};
+
+document.querySelector(".close").onclick = function() {
+  document.getElementById("mapModal").style.display = "none";
+};
+
+    </script> -->
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcl6fxIRgrvRKsq6cSv19M_HJ4JbNJ-is&callback=initMap" async defer>
+    </script>
+    <script>
+        let map;
+
+document.getElementById("openMapBtn").onclick = function (e) {
+  e.preventDefault();
+//   document.getElementById("mapModal").style.width = "100vw";
+  document.getElementById("mapModal").style.height = "fit content";
+//   document.getElementById("mapModal").style.border = "2px solid black";
+  document.getElementById("mapModal").style.margin = "5px";
+  document.getElementById("mapModal").style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)";
+//   document.getElementById("mapModal").style.borderRadius = "0.75rem";
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+
+        // Load map with user's location
+        initMap(userLocation);
+      },
+      () => {
+        alert("Geolocation failed. Please allow location access.");
+      }
+    );
+  } else {
+    alert("Geolocation not supported by this browser.");
+  }
+};
+
+// document.querySelector(".close").onclick = function () {
+//   document.getElementById("mapModal").style.display = "none";
+// };
+
+function initMap(location) {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: location,
+    zoom: 20,
+  });
+
+  new google.maps.Marker({
+    position: location,
+    map: map,
+    title: "You are here!",
+  });
+}
+      </script>
 </body>
 </html>
