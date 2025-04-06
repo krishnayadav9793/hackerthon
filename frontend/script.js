@@ -64,7 +64,7 @@ function searchPlace() {
                   directionsRenderer.setDirections(response);
                   const leg = response.routes[0].legs[0];
                   document.getElementById("distanceInfo").textContent =
-                    Distance: ${leg.distance.text} | Estimated Time: ${leg.duration.text};
+                  `Distance: ${leg.distance.text} | Estimated Time: ${leg.duration.text};`
                 } else {
                   alert("Failed to get directions: " + status);
                 }
